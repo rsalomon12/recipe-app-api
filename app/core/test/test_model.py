@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 from core import models
 
+
 def sample_user(email='test@rogelio.com', password='testpass'):
     """Create a sample user"""
     return get_user_model().objects.create_user(email, password)
@@ -52,3 +53,12 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(tag), tag.name)
+
+    def test_ingridient_str(self):
+        """Test ingridient string representation"""
+        ingridient = models.Ingridient.objects.create(
+            user=sample_user(),
+            name='Cucumber'
+        )
+
+        self.assertEqual(str(ingridient), ingridient.name)
